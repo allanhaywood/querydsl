@@ -61,6 +61,7 @@ public class WindowFunctionTest {
         assertEquals("variance(path)", toString(SQLExpressions.variance(path)));
         assertEquals("var_pop(path)", toString(SQLExpressions.varPop(path)));
         assertEquals("var_samp(path)", toString(SQLExpressions.varSamp(path)));
+        assertEquals("preceding 1", toString(SQLExpressions.window("preceding", 1)));
 
         // TODO FIRST
         // TODO LAST

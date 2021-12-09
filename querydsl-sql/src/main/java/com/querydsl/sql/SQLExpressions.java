@@ -20,6 +20,7 @@ import java.util.Map;
 import com.querydsl.core.Tuple;
 import com.querydsl.core.types.*;
 import com.querydsl.core.types.dsl.*;
+import sun.tools.tree.IntegerExpression;
 
 /**
  * Common SQL expressions
@@ -1243,6 +1244,12 @@ public final class SQLExpressions {
      */
     public static StringExpression groupConcat(Expression<String> expr, String separator) {
         return Expressions.stringOperation(SQLOps.GROUP_CONCAT2, expr, Expressions.constant(separator));
+    }
+
+    public static StringExpression window(String name, Integer value) {
+        StringExpression nameExpression = Expressions.stringTemplate(name);
+        StringExpression valueExpression = Expressions.stringTemplate(value.toString());
+        return Expressions.stringOperation(SQLOps.WINDOW_ROW_NAME_VALUE, nameExpression, valueExpression);
     }
 
     private SQLExpressions() { }

@@ -396,6 +396,9 @@ public class SQLTemplates extends Templates {
         add(SQLOps.SET_LITERAL, "{0} = {1}");
         add(SQLOps.SET_PATH, "{0} = values({1})");
 
+        // Window functions
+        add(SQLOps.WINDOW_ROW_NAME_VALUE, "{0} {1}");
+
         // default type names
         addTypeNameToCode("null", Types.NULL);
         addTypeNameToCode("char", Types.CHAR);

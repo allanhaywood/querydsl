@@ -58,8 +58,7 @@ public class WindowRows<A> {
 
         public BetweenAnd preceding(Expression<Integer> expr) {
             args.add(expr);
-            str.append(" {").append(offset++).append("}");
-            str.append(PRECEDING);
+            str.append(SQLExpressions.window(PRECEDING, offset++));
             return new BetweenAnd();
         }
 
@@ -69,8 +68,7 @@ public class WindowRows<A> {
 
         public BetweenAnd following(Expression<Integer> expr) {
             args.add(expr);
-            str.append(" {").append(offset++).append("}");
-            str.append(FOLLOWING);
+            str.append(SQLExpressions.window(FOLLOWING, offset++));
             return new BetweenAnd();
         }
 
@@ -101,8 +99,7 @@ public class WindowRows<A> {
 
         public WindowFunction<A> preceding(Expression<Integer> expr) {
             args.add(expr);
-            str.append(PRECEDING);
-            str.append(" {").append(offset++).append("}");
+            str.append(SQLExpressions.window(PRECEDING, offset++));
             return rv.withRowsOrRange(str.toString(), args);
         }
 
@@ -112,8 +109,7 @@ public class WindowRows<A> {
 
         public WindowFunction<A> following(Expression<Integer> expr) {
             args.add(expr);
-            str.append(" {").append(offset++).append("}");
-            str.append(FOLLOWING);
+            str.append(SQLExpressions.window(FOLLOWING, offset++));
             return rv.withRowsOrRange(str.toString(), args);
         }
 
@@ -128,7 +124,7 @@ public class WindowRows<A> {
 
     private final List<Expression<?>> args = new ArrayList<>();
 
-    private int offset;
+    private Integer offset;
 
     public WindowRows(WindowFunction<A> windowFunction, String prefix, int offset) {
         this.rv = windowFunction;
@@ -154,12 +150,11 @@ public class WindowRows<A> {
 
     public WindowFunction<A> preceding(Expression<Integer> expr) {
         args.add(expr);
-        str.append(" {").append(offset++).append("}");
-        str.append(PRECEDING);
+        str.append(SQLExpressions.window(PRECEDING, offset++));
         return rv.withRowsOrRange(str.toString(), args);
     }
 
-    public WindowFunction<A> preceding(int i) {
+    public WindowFunction<A> preceding(Integer i) {
         return preceding(ConstantImpl.create(i));
     }
 

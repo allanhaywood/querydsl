@@ -81,7 +81,8 @@ public enum SQLOps implements Operator {
     GROUP_CONCAT(String.class),
     GROUP_CONCAT2(String.class),
     SET_PATH(Object.class),
-    SET_LITERAL(Object.class);
+    SET_LITERAL(Object.class),
+    WINDOW_ROW_NAME_VALUE(Object.class);
 
     private final Class<?> type;
 
